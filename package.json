@@ -7,10 +7,8 @@
     "./styles/base.css": "./src/styles/base.css"
   },
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
+    "playground": "npm --prefix playground run dev",
+    "playground:build": "npm --prefix playground run build"
   },
   "peerDependencies": {
     "astro": "^6.0.4"
