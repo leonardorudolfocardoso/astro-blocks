@@ -1,0 +1,27 @@
+---
+import Layout from "../components/Layout.astro";
+import { Footer as FooterBlock } from "astro-blocks";
+---
+
+<Layout>
+	<FooterBlock>
+	  <p>Design inspired by <a href="https://spacex.com" target="_blank" rel="noopener noreferrer">SpaceX</a>. Built for learning purposes only — not affiliated with or endorsed by SpaceX.</p>
+	</FooterBlock>
+</Layout>
+
+<style>
+  p {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+
+    &:hover {
+      color: white;
+    }
+  }
+</style>
