@@ -3,13 +3,14 @@ interface Props {
   title: string
   subtitle?: string
   video: string
+  content?: 'left' | 'right'
   style?: string
 }
-const { title, subtitle, video, style } = Astro.props;
+const { title, subtitle, video, content = 'right', style } = Astro.props;
 const inlineStyle = `--overlay-color: var(--video-hero-overlay-color, #000); ${style ?? ''}`;
 ---
 
-<section class="hero" style={inlineStyle}>
+<section class={`hero${content === 'left' ? ' hero--content-left' : ''}`} style={inlineStyle}>
   <div class="hero-media">
     <video autoplay muted loop playsinline aria-hidden="true" class="hero-video">
       <source src={video} />
@@ -71,6 +72,10 @@ const inlineStyle = `--overlay-color: var(--video-hero-overlay-color, #000); ${s
       min-height: unset;
     }
 
+    .hero--content-left {
+      flex-direction: row-reverse;
+    }
+
     .hero-media {
       flex: 3;
       height: 100%;
@@ -81,6 +86,13 @@ const inlineStyle = `--overlay-color: var(--video-hero-overlay-color, #000); ${s
         linear-gradient(to bottom, var(--overlay-color), transparent 25%),
         linear-gradient(to bottom, transparent 70%, var(--overlay-color) 100%),
         linear-gradient(to right, transparent 70%, var(--overlay-color) 100%);
+    }
+
+    .hero--content-left .hero-media::after {
+      background:
+        linear-gradient(to bottom, var(--overlay-color), transparent 25%),
+        linear-gradient(to bottom, transparent 70%, var(--overlay-color) 100%),
+        linear-gradient(to left, transparent 70%, var(--overlay-color) 100%);
     }
 
     .hero-content {
