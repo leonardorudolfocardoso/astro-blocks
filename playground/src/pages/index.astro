@@ -1,17 +1,48 @@
 ---
-
+import Layout from "../components/Layout.astro";
+import { Header as HeaderBlock, Footer as FooterBlock, VideoHero as VideoHeroBlock } from "astro-blocks";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout>
+  <HeaderBlock>
+    <h1>spacez</h1>
+  </HeaderBlock>
+
+  <VideoHeroBlock
+    title="EXPANDING HUMANITY BEYOND EARTH"
+    subtitle="Humanity's future does not end on Earth. Our mission is to develop the technology that will enable people to explore, live, and work beyond our planet."
+    video="/mars.webm"
+  />
+	<VideoHeroBlock
+	  title="ADVANCING SPACE TRANSPORTATION"
+	  subtitle="The Nova Heavy launch system is a fully reusable vehicle designed to carry satellites, cargo, and future crews to orbit and deep-space destinations."
+	  video="/rocket.webm"
+	/>
+
+  <FooterBlock>
+    <p>Design inspired by <a href="https://spacex.com" target="_blank" rel="noopener noreferrer">SpaceX</a>. Built for learning purposes only — not affiliated with or endorsed by SpaceX.</p>
+  </FooterBlock>
+</Layout>
+
+<style>
+  h1 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+
+  p {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+
+    &:hover {
+      color: white;
+    }
+  }
+</style>
