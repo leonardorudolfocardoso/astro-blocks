@@ -1,0 +1,101 @@
+---
+interface Props {
+  title: string
+  subtitle?: string
+  video: string
+  style?: string
+}
+const { title, subtitle, video, style } = Astro.props;
+const inlineStyle = `--overlay-color: var(--video-hero-overlay-color, #000); ${style ?? ''}`;
+---
+
+<section class="hero" style={inlineStyle}>
+  <div class="hero-media">
+    <video autoplay muted loop playsinline aria-hidden="true" class="hero-video">
+      <source src={video} />
+    </video>
+  </div>
+
+  <div class="hero-content">
+    <h1>{title}</h1>
+    {subtitle && <p>{subtitle}</p>}
+  </div>
+</section>
+
+<style>
+  .hero {
+    display: flex;
+    flex-direction: column;
+    min-height: 100svh;
+  }
+
+  .hero-media {
+    position: relative;
+    height: 70svh;
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+
+  .hero-media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to bottom, var(--overlay-color), transparent 25%),
+      linear-gradient(to bottom, transparent 70%, var(--overlay-color) 100%);
+    pointer-events: none;
+  }
+
+  .hero-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hero-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2rem 1.5rem;
+
+    p {
+      margin-top: 0.5rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .hero {
+      flex-direction: row;
+      height: 100svh;
+      min-height: unset;
+    }
+
+    .hero-media {
+      flex: 3;
+      height: 100%;
+    }
+
+    .hero-media::after {
+      background:
+        linear-gradient(to bottom, var(--overlay-color), transparent 25%),
+        linear-gradient(to right, transparent 70%, var(--overlay-color) 100%);
+    }
+
+    .hero-content {
+      flex: 1;
+      padding: 2rem 3rem;
+      min-width: 280px;
+      max-width: 420px;
+
+      h1 {
+        font-size: clamp(1.4rem, 2vw, 2rem);
+      }
+
+      p {
+        font-size: 0.95rem;
+        max-width: 38ch;
+      }
+    }
+  }
+</style>
