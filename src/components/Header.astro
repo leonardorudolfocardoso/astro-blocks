@@ -7,9 +7,29 @@
 
 <style>
   .header {
-    position: absolute;
+    position: fixed;
     width: 100%;
     z-index: 10;
     padding: 1rem 1.5rem;
+    transition: transform 0.3s ease;
+  }
+
+  .header.hidden {
+    transform: translateY(-100%);
   }
 </style>
+
+<script>
+  const header = document.querySelector(".header");
+  let lastScrollY = window.scrollY;
+
+  window.addEventListener("scroll", () => {
+    const currentScrollY = window.scrollY;
+    if (currentScrollY > lastScrollY && currentScrollY > 100) {
+      header?.classList.add("hidden");
+    } else {
+      header?.classList.remove("hidden");
+    }
+    lastScrollY = currentScrollY;
+  });
+</script>
