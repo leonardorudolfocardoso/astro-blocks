@@ -1,11 +1,20 @@
 ---
 import Layout from "../components/Layout.astro";
-import { Header as HeaderBlock, Footer as FooterBlock, VideoHero as VideoHeroBlock } from "astro-blocks";
+import { Header as HeaderBlock, Footer as FooterBlock, VideoHero as VideoHeroBlock, NavMenu } from "astro-blocks";
+
+const links = [
+  { label: "Home", href: "/" },
+  { label: "Header", href: "/header" },
+  { label: "Footer", href: "/footer" },
+  { label: "Video Hero", href: "/video-hero" },
+  { label: "Image Hero", href: "/image-hero" },
+];
 ---
 
 <Layout>
   <HeaderBlock>
-    <h1>spacez</h1>
+    <a class="logo" href="/">spacez</a>
+    <NavMenu links={links} />
   </HeaderBlock>
 
   <VideoHeroBlock
@@ -25,10 +34,12 @@ import { Header as HeaderBlock, Footer as FooterBlock, VideoHero as VideoHeroBlo
 </Layout>
 
 <style>
-  h1 {
+  .logo {
     font-size: 1.25rem;
     font-weight: 600;
     letter-spacing: 0.05em;
+    text-decoration: none;
+    color: inherit;
   }
 
   p {
