@@ -1,0 +1,86 @@
+---
+interface Props {
+  links: { label: string; href: string }[];
+}
+const { links } = Astro.props;
+---
+
+<nav class="nav">
+  <button class="burger" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <ul id="nav-menu" class="menu" role="list">
+    {links.map(({ label, href }) => (
+      <li><a href={href}>{label}</a></li>
+    ))}
+  </ul>
+</nav>
+
+<style>
+  .burger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    position: relative;
+    z-index: 100;
+  }
+
+  .burger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: currentColor;
+    transition: transform 0.3s, opacity 0.3s;
+  }
+
+  .burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+  .burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .menu a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  @media (max-width: 768px) {
+    .burger { display: flex; }
+
+    .menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      padding-top: 5rem;
+      background: black;
+      flex-direction: column;
+      align-items: flex-start;
+      padding-inline: 1.5rem;
+      gap: 2rem;
+    }
+
+    .menu.open { display: flex; }
+  }
+</style>
+
+<script>
+  const burger = document.querySelector(".burger");
+  const menu = document.querySelector(".menu");
+
+  burger?.addEventListener("click", () => {
+    const isOpen = menu?.classList.toggle("open");
+    burger.setAttribute("aria-expanded", String(isOpen));
+    document.body.style.overflow = isOpen ? "hidden" : "";
+  });
+</script>
